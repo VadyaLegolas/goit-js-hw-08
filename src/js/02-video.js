@@ -5,10 +5,7 @@ import { common } from '../common';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-const currentTime =
-  JSON.parse(localStorage.getItem(common.VIDEOPLAYER_CURRENT_TIME)) ?? '';
-
-player.on('play', player.setCurrentTime(Number(currentTime)));
+player.on('play', () => player.setCurrentTime(Number(JSON.parse(localStorage.getItem(common.VIDEOPLAYER_CURRENT_TIME)))));
 
 player.on('timeupdate', trottle(getTime, 1000));
 
