@@ -8,7 +8,7 @@ const refs = {
   submitBtn: document.querySelector('button[type="submit"]'),
 };
 
-const formData =
+let formData =
   JSON.parse(localStorage.getItem(common.FEEDBACK_FORM_STATE)) ?? {};
 
 refs.form.addEventListener('input', trottle(onFormInput, 500));
@@ -23,12 +23,17 @@ function onFormInput(e) {
 
 function onSubmit(e) {
   e.preventDefault();
-  console.log(
-    'FormData: ',
-    JSON.parse(localStorage.getItem(common.FEEDBACK_FORM_STATE))
-  );
+  if (JSON.parse(localStorage.getItem(common.FEEDBACK_FORM_STATE))
+  ) {
+    console.log(
+      'FormData: ',
+      JSON.parse(localStorage.getItem(common.FEEDBACK_FORM_STATE))
+    );
+  }
+  
   e.currentTarget.reset();
   localStorage.removeItem(common.FEEDBACK_FORM_STATE);
+  formData = {}
 }
 
 function populateFormInput() {
